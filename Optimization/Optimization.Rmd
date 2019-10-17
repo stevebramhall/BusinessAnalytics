@@ -1,0 +1,59 @@
+---
+title: "Optimizations"
+author: "Steve Bramhall"
+date: "October 15, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(lpSolve)
+```
+
+```{r Unit07 ForLive}
+# 100T + 60C
+objective.in <- c(100,60)
+
+# 2T + C  <= 59
+# T  + 2C <= 40
+const.mat <- matrix(c(2,1,1,2), nrow = 2, byrow = TRUE)
+const.rhs <- c(59,40)
+const.dir <- c("<=","<=")
+
+optimum <- lp(direction = "max", objective.in, const.mat, const.dir, const.rhs)
+
+optimum$solution # show optimized T and C
+optimum$objval   # show max profit
+```
+
+```{r Unit08 ForLive Prob1}
+# 8X + 12Y + 15Z
+objective.in <- c(8,12,15)
+
+# 10X + 20Y + 25Z  <= 140, budget
+# 6X  + 8Y  +  9Z  <= 72, max room space
+const.mat <- matrix(c(10,20,25, 8,12,15), nrow = 2, byrow = TRUE)
+const.rhs <- c(140,72)
+const.dir <- c("<=","<=")
+
+optimum <- lp(direction = "max", objective.in, const.mat, const.dir, const.rhs)
+
+optimum$solution # show optimized cabinet X, Y, Z
+optimum$objval   # show max cu ft of files
+```
+
+```{r Unit08 ForLive Prob2}
+# 8X + 12Y + 15Z
+objective.in <- c(8,12,15)
+
+# 10X + 20Y + 25Z  <= 140, budget
+# 6X  + 8Y  +  9Z  <= 72, max room space
+const.mat <- matrix(c(10,20,25, 8,12,15), nrow = 2, byrow = TRUE)
+const.rhs <- c(140,72)
+const.dir <- c("<=","<=")
+
+optimum <- lp(direction = "max", objective.in, const.mat, const.dir, const.rhs)
+
+optimum$solution # show optimized cabinet X, Y, Z
+optimum$objval   # show max cu ft of files
+```
